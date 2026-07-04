@@ -1,64 +1,66 @@
 <html>
-<head>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="static/style.css">
-  <link rel="stylesheet" href="static/bootstrap.min.css">
-<script>
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script>
+      const logout = async (e) => {
+      //Include the code for logout here.
+      };
 
-const logout = async (e) => {
-//Include the code for logout here.
-};
+      let checkSession = () => {
+        let curr_user = sessionStorage.getItem("username");
 
-let checkSession = ()=>{
-  let curr_user = sessionStorage.getItem("username");
+        if (curr_user && curr_user !== "") {
+          document.getElementById("loginlogout").innerHTML = 
+          '<span class="homepage_links">' + curr_user +'</span>' +
+          '<a class="btn homepage_links" onclick="logout()" href="/" style="background-color: #8E0111; color: #F5F5F5; margin-left: 10px; padding: 10px;">Logout</a>'
+        } else {
+          document.getElementById("loginlogout").innerHTML = 
+          '<a class="btn homepage_links" href="/login" style="background-color: #3E5A20; color: #F5F5F5; padding: 10px;">Login</a>'+
+          '<a class="btn homepage_links"  href="/register" style="background-color: #272E20; color: #F5F5F5; margin-left: 10px; padding: 10px;">Register</a>'
+        }
+      }
 
-  if (curr_user && curr_user !== "") {
-    document.getElementById("loginlogout").innerHTML = 
-    '<span class="homepage_links">' + curr_user +'</span>' +
-    '<a class="homepage_links" onclick="logout()" href="/">Logout</a>'
-  } else {
-    document.getElementById("loginlogout").innerHTML = 
-    '<a class="homepage_links" href="/login">Login</a>'+
-    '<a class="homepage_links"  href="/register">Register</a>'
-  }
- }
-</script>
-</head>
-<body onload="checkSession()">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:darkturquoise; height: 1in;">
-  <div class="container-fluid">
-    <h2 style="padding-right: 5%;">Dealerships</h2>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" style="font-size: larger;" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/about">About Us</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" style="font-size: larger;" href="/contact">Contact Us</a>
-        </li>
-      </ul>
-      <span class="navbar-text">
-        <div class="loginlink" id="loginlogout">
+    </script>
+  </head>
+
+  <body onload="checkSession()" style="background-color: #1F1F1F;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#1F1F1F; height: 1in;">
+      <div class="container-fluid">
+        <h2 style="padding-right: 5%; color: #F5F5F5;">Dealers</h2>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="btn nav-link active" style="font-size: larger; color: #F5F5F5; background-color: #3E5A20; padding: 6px 16px;" href="#">Home</a>
+            </li>
+            <li class="nav-item"  style="margin-left: 20px;">
+              <a class="nav-link" style="font-size: larger; color: #F5F5F5;" href="/about">About Us</a>
+            </li>
+            <li class="nav-item"  style="margin-left: 20px;">
+              <a class="nav-link" style="font-size: larger; color: #F5F5F5;" href="/contact">Contact Us</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <div class="loginlink" id="loginlogout"></div>
+          </span>
         </div>
-        </span>
+      </div>
+    </nav>
+
+    <div style="display: flex;flex-direction: column;">
+      <div class="card" style="width: 50%; margin-top: 30px; align-self: center; background-color:#1F1F1F; border: none;">
+        <img style="border-radius: 10px;" src="static/car_dealership.jpg" class="card-img-top" alt="...">
+        <div class="banner" style="margin-top:20px">
+          <h5 style="color: #F5F5F5;">Welcome to our Dealerships!</h5>
+          <a href="/dealers" class="btn" style="background-color: #3E5A20; color: #F5F5F5; margin:10px; padding: 10px;">View Dealerships</a>
+        </div>
+      </div>
     </div>
-  </div>
-</nav>
-<div style="display: flex;flex-direction: column;">
-<div class="card" style="width: 50%;margin-top: 50px;align-self: center;">
-  <img src="static/car_dealership.jpg" class="card-img-top" alt="...">
-  <div class="banner">
-    <h5>Welcome to our Dealerships!</h5>
-    <a href="/dealers" class="btn" style="background-color: aqua;margin:10px">View Dealerships</a>
-  </div>
-</div>
-</div>
-</body>
+  </body>
 </html>
