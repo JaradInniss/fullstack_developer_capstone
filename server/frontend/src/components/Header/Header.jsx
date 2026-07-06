@@ -32,33 +32,37 @@ let curr_user = sessionStorage.getItem('username')
 //If the user is logged in, show the username and logout option on home page
 if ( curr_user !== null &&  curr_user !== "") {
     home_page_items = <div className="input_panel">
-      <text className='username'>{sessionStorage.getItem("username")}</text>
-    <a className="nav_item" href="/djangoapp/logout" onClick={logout}>Logout</a>
-  </div>
+      <text className='username' style={{ color: "#F5F5F5" }}>
+        {sessionStorage.getItem("username")}
+      </text>
+      <a className="btn nav_item" href="/djangoapp/logout" onClick={logout} style={{ backgroundColor: "#8E0111", color: "#F5F5F5", marginLeft: "10px", padding: "10px" }}>
+        Logout
+      </a>
+    </div>
 }
     return (
-        <div>
-          <nav class="navbar navbar-expand-lg navbar-light" style={{backgroundColor:"darkturquoise",height:"1in"}}>
+        <div style={{backgroundColor:"#1F1F1F"}}>
+          <nav class="navbar navbar-expand-lg navbar-light" style={{backgroundColor:"#1F1F1F", height:"1in"}}>
             <div class="container-fluid">
-              <h2 style={{paddingRight: "5%"}}>Dealerships</h2>
+              <h2 style={{paddingRight: "5%", color:"#F5F5F5"}}>Dealers</h2>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link active" style={{fontSize: "larger"}} aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" style={{fontSize: "larger", color: "#F5F5F5"}} aria-current="page" href="/">Home</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" style={{fontSize: "larger"}} href="/about">About Us</a>
+                  <li class="nav-item" style={{ marginLeft: "20px" }}>
+                    <a class="nav-link" style={{fontSize: "larger", color: "#F5F5F5"}} href="/about">About Us</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" style={{fontSize: "larger"}} href="/contact">Contact Us</a>
+                  <li class="nav-item" style={{ marginLeft: "20px" }}>
+                    <a class="nav-link" style={{fontSize: "larger", color: "#F5F5F5"}} href="/contact">Contact Us</a>
                   </li>
                 </ul>
                 <span class="navbar-text">
                   <div class="loginlink" id="loginlogout">
-                  {home_page_items}
+                    {home_page_items}
                   </div>
                   </span>
               </div>

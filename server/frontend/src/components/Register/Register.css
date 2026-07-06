@@ -3,7 +3,7 @@
   flex-direction: column;
   margin: auto;
   margin-top: 2%;
-  background-color: darkturquoise;
+  background-color: #1f1f1f;
   min-width: 350px;
   width: 30%;
 }
@@ -22,9 +22,12 @@
 
 .input_field{
   height:40px;
-  width:200px;
+  width:260px;
   margin:.5cm;
   font-size: medium;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
 }
 
 .submit_panel{
@@ -39,13 +42,15 @@
   margin-right: 30%;
   cursor: pointer;
   font-size: large;
-  color: rgb(97, 64, 128);
+  color: #F5F5F5;
   border-radius: 10px;
+  border: none;
+  background-color: #272E20;
   height:50px;
 }
 
 .submit:hover {
-  background-color: wheat;
+  background-color: #3E5A20;
 }
 
 .header{
@@ -57,9 +62,9 @@
 .img_icon{
   width:40px;
   margin:.1cm;
-  background-color:#0C9;
-  color:#FFF;
-  border-radius:50px;
-  text-align:center;
-  box-shadow: 2px 2px 3px #999;  
+  padding: .2cm;
+  background-color: #F5F5F5;
+  border: none;
+  border-radius:360px;
+  text-align:center; 
 }

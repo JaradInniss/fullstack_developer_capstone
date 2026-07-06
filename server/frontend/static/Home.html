@@ -7,6 +7,24 @@
     <script>
       const logout = async (e) => {
       //Include the code for logout here.
+        let logout_url = window.location.origin + "/djangoapp/logout";
+        const response = await fetch(logout_url, {
+          method: "GET",
+        });
+
+        const json = await response.json();
+        if (json) {
+          // Clear session storage and reload page
+          let username = sessionStorage.getItem("username");
+          sessionStorage.removeItem("username");
+          window.location.href = window.location.origin;
+          window.location.reload();
+           // Notify user of logout
+          alert("Logging out "+username+"...") 
+        }
+        else {
+          alert("The user could not be logged out.")
+        }
       };
 
       let checkSession = () => {
@@ -14,8 +32,8 @@
 
         if (curr_user && curr_user !== "") {
           document.getElementById("loginlogout").innerHTML = 
-          '<span class="homepage_links">' + curr_user +'</span>' +
-          '<a class="btn homepage_links" onclick="logout()" href="/" style="background-color: #8E0111; color: #F5F5F5; margin-left: 10px; padding: 10px;">Logout</a>'
+          '<span class="btn homepage_links" style="color: #F5F5F5; margin-right: 30px; border: none; border-radius: 200px; background-color: #272E20; padding: 10px 40px;">' + curr_user +'</span>' +
+          '<a class="btn homepage_links" onclick="logout()" href="/" style="background-color: #8E0111; color: #F5F5F5; padding: 10px;">Logout</a>'
         } else {
           document.getElementById("loginlogout").innerHTML = 
           '<a class="btn homepage_links" href="/login" style="background-color: #3E5A20; color: #F5F5F5; padding: 10px;">Login</a>'+
