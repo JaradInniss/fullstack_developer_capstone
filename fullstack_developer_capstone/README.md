@@ -1,1 +1,0 @@
-# fullstack_developer_capstone
