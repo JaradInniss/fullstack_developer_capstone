@@ -21,6 +21,15 @@ const PostReview = () => {
   let review_url = root_url+`djangoapp/add_review`;
   let carmodels_url = root_url+`djangoapp/get_cars`;
 
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop().split(';').shift();
+    }
+    return null;
+  };
+
   const postreview = async ()=>{
     let name = sessionStorage.getItem("firstname")+" "+sessionStorage.getItem("lastname");
     //If the first and second name are stores as null, use the username
@@ -47,14 +56,23 @@ const PostReview = () => {
       "car_year": year,
     });
 
-    console.log(jsoninput);
+    const csrfToken = getCookie("csrftoken");
+    const headers = {
+      "Content-Type": "application/json",
+      ...(csrfToken ? { "X-CSRFToken": csrfToken } : {}),
+    };
+
     const res = await fetch(review_url, {
       method: "POST",
-      headers: {
-          "Content-Type": "application/json",
-      },
+      headers,
+      credentials: "include",
       body: jsoninput,
   });
+
+  if (!res.ok) {
+    alert("Your review could not be posted. Please refresh the page and try again.");
+    return;
+  }
 
   const json = await res.json();
   if (json.status === 200) {
@@ -93,28 +111,39 @@ const PostReview = () => {
   return (
     <div>
       <Header/>
-      <div  style={{margin:"5%"}}>
-      <h1 style={{color:"darkblue"}}>{dealer.full_name}</h1>
-      <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
-      <div className='input_field'>
-      Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
+      <div  style={{ margin:"5%", justifyContent: "center", alignItems: "center", display: "flex", flexDirection: "column" }}>
+      <h2 style={{ color:"#F5F5F5", marginBottom: "20px" }}>{dealer.full_name}</h2>
+      
+      <div>
+          <textarea id='review' cols='50' rows='7' onChange={(e) => setReview(e.target.value)}></textarea>
       </div>
-      <div className='input_field'>
-      Car Make 
-      <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
-      <option value="" selected disabled hidden>Choose Car Make and Model</option>
-      {carmodels.map(carmodel => (
-          <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
-      ))}
-      </select>        
-      </div >
+    
+      <div style={{ color:"#F5F5F5", display: "flex", flexDirection: "row", justifyContent: "space-between", width: "50%" }}>
 
-      <div className='input_field'>
-      Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
+        <div className='input_field' style={{ color:"#F5F5F5" }}>
+          Purchase Date <input type="date" onChange={(e) => setDate(e.target.value)}/>
+        </div>
+
+        <div className='input_field' style={{ color:"#F5F5F5" }}>
+          Car Make 
+          <select name="cars" id="cars" onChange={(e) => setModel(e.target.value)}>
+              <option value="" selected disabled hidden>Choose Car Make and Model</option>
+              {carmodels.map(carmodel => (
+                  <option value={carmodel.CarMake+" "+carmodel.CarModel}>{carmodel.CarMake} {carmodel.CarModel}</option>
+              ))}
+          </select>        
+        </div >
+
+        <div className='input_field' style={{ color:"#F5F5F5" }}>
+          Car Year <input type="int" onChange={(e) => setYear(e.target.value)} max={2023} min={2015}/>
+        </div>
       </div>
+      
 
       <div>
-      <button className='postreview' onClick={postreview}>Post Review</button>
+        <button className='postreview' onClick={postreview} style={{ color:"#F5F5F5", fontSize: "20px", border: "none", borderRadius: "10px", backgroundColor: "#272E20", padding: "20px 40px" }}>
+            Post Review
+        </button>
       </div>
     </div>
     </div>
