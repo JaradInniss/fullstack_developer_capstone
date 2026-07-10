@@ -16,13 +16,10 @@ table{
   .review_panel{
     display: flex;
     flex-direction: column;
-    border: solid grey;
     position: relative;
     height:7cm;
     width:6cm;
-    overflow-y: scroll;
-    padding:.3cm;
-    padding-top: 0%;
+    padding: 20px;
     border-radius:10px; 
     box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.5);
     margin-bottom: .5cm;
@@ -56,14 +53,14 @@ table{
   }
 
   .reviewer {
-    margin: 10px; /* Optional margin for spacing */
-    font-style: italic;
-    color: gray;
-    font-size: small;
+    font-style: bold;
+    font-size: 16px;
 }
 
 .review {
   margin-top: 1.5cm;
+  height: 100px;
+  overflow-y: scroll;
 }
 
 .emotion_icon {
@@ -71,7 +68,7 @@ table{
   position:fixed;
     width:40px;
     height:40px;
-    background-color:#0C9;
+    background-color:#F5F5F5;
     color:#FFF;
     border-radius:50px;
     text-align:center;
