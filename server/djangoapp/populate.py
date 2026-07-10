@@ -1,6 +1,31 @@
-from .models import CarMake, CarModel
+import os
+import sys
+from pathlib import Path
+
+project_root = Path(__file__).resolve().parent.parent
+if str(project_root) not in sys.path:
+    sys.path.append(str(project_root))
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "djangoproj.settings")
+
+import django
+from django.db import connection
+
+django.setup()
+
+from djangoapp.models import CarMake, CarModel
+
 
 def initiate():
+    from django.core.management import call_command
+
+    table_names = set(connection.introspection.table_names())
+    if not {'djangoapp_carmake', 'djangoapp_carmodel'}.issubset(table_names):
+        call_command("migrate", verbosity=0, interactive=False)
+
+    if CarMake.objects.exists():
+        return
+
     car_make_data = [
         {"name":"NISSAN", "description":"Great cars. Japanese technology"},
         {"name":"Mercedes", "description":"Great cars. German technology"},
@@ -11,7 +36,7 @@ def initiate():
 
     car_make_instances = []
     for data in car_make_data:
-            car_make_instances.append(CarMake.objects.create(name=data['name'], description=data['description']))
+            car_make_instances.append(CarMake.objects.get_or_create(name=data['name'], defaults={'description': data['description']})[0])
 
 
     # Create CarModel instances with the corresponding CarMake instances
@@ -45,4 +70,11 @@ def initiate():
     ]
 
     for data in car_model_data:
-            CarModel.objects.create(name=data['name'], make=data['make'], type=data['type'], year=data['year'])
+            CarModel.objects.get_or_create(
+                name=data['name'],
+                defaults={'make': data['make'], 'type': data['type'], 'year': data['year']}
+            )
+
+
+if __name__ == "__main__":
+    initiate()

@@ -52,42 +52,46 @@ return(
   <div>
       <Header/>
 
-     <table className='table'>
-      <tr>
-      <th>ID</th>
-      <th>Dealer Name</th>
-      <th>City</th>
-      <th>Address</th>
-      <th>Zip</th>
-      <th>
-      <select name="state" id="state" onChange={(e) => filterDealers(e.target.value)}>
-      <option value="" selected disabled hidden>State</option>
-      <option value="All">All States</option>
-      {states.map(state => (
-          <option value={state}>{state}</option>
-      ))}
-      </select>        
+        <table className='table' style={{ width: "95%", margin: "0 auto"}}>
+            <tr style={{ backgroundColor: "#2C2C2C" }}>
+                <th style={{ color: "#F5F5F5" }}>ID</th>
+                <th style={{ color: "#F5F5F5" }}>Dealer Name</th>
+                <th style={{ color: "#F5F5F5" }}>City</th>
+                <th style={{ color: "#F5F5F5" }}>Address</th>
+                <th style={{ color: "#F5F5F5" }}>Zip</th>
+                <th>
+                    <select style={{ backgroundColor: "#3E5A20", color: "#F5F5F5" }} name="state" id="state" onChange={(e) => filterDealers(e.target.value)}>
+                    <option value="" selected disabled hidden>State</option>
+                    <option value="All">All States</option>
+                    {states.map(state => (
+                        <option value={state}>{state}</option>
+                    ))}
+                    </select>        
 
-      </th>
-      {isLoggedIn ? (
-          <th>Review Dealer</th>
-         ):<></>
-      }
-      </tr>
-     {dealersList.map(dealer => (
-        <tr>
-          <td>{dealer['id']}</td>
-          <td><a href={'/dealer/'+dealer['id']}>{dealer['full_name']}</a></td>
-          <td>{dealer['city']}</td>
-          <td>{dealer['address']}</td>
-          <td>{dealer['zip']}</td>
-          <td>{dealer['state']}</td>
-          {isLoggedIn ? (
-            <td><a href={`/postreview/${dealer['id']}`}><img src={review_icon} className="review_icon" alt="Post Review"/></a></td>
-           ):<></>
-          }
-        </tr>
-      ))}
+                </th>
+                {isLoggedIn ? (
+                    <th style={{ color: "#F5F5F5" }}>Review Dealer</th>
+                    ):<></>
+                }
+            </tr>
+            {dealersList.map(dealer => (
+                <tr style={{ color: "#F5F5F5" }}>
+                    <td>{dealer['id']}</td>
+                    <td><a href={'/dealer/'+dealer['id']}>{dealer['full_name']}</a></td>
+                    <td>{dealer['city']}</td>
+                    <td>{dealer['address']}</td>
+                    <td>{dealer['zip']}</td>
+                    <td>{dealer['state']}</td>
+                    {isLoggedIn ? (
+                        <td>
+                            <a href={`/postreview/${dealer['id']}`} style={{ textDecoration: "none", justifyContent: "center", alignItems: "center" }}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#f5f5f5" viewBox="0 0 256 256"><path d="M232,96a16,16,0,0,0-16-16H184V48a16,16,0,0,0-16-16H40A16,16,0,0,0,24,48V176a8,8,0,0,0,13,6.22L72,154V184a16,16,0,0,0,16,16h93.59L219,230.22a8,8,0,0,0,5,1.78,8,8,0,0,0,8-8Zm-42.55,89.78a8,8,0,0,0-5-1.78H88V152h80a16,16,0,0,0,16-16V96h32V207.25Z"></path></svg>
+                            </a>
+                        </td>
+                    ):<></>
+                    }
+                </tr>
+            ))}
      </table>;
   </div>
 )

@@ -32,7 +32,7 @@ let curr_user = sessionStorage.getItem('username')
 //If the user is logged in, show the username and logout option on home page
 if ( curr_user !== null &&  curr_user !== "") {
     home_page_items = <div className="input_panel">
-      <text className='username' style={{ color: "#F5F5F5" }}>
+      <text className='btn username' style={{ fontSize: "16px", color: "#F5F5F5", marginRight: "30px", border: "none", borderRadius: "200px", backgroundColor: "#272E20", padding: "10px 40px" }}>
         {sessionStorage.getItem("username")}
       </text>
       <a className="btn nav_item" href="/djangoapp/logout" onClick={logout} style={{ backgroundColor: "#8E0111", color: "#F5F5F5", marginLeft: "10px", padding: "10px" }}>
