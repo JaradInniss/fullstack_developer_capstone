@@ -12,7 +12,11 @@ class DealerReviewsViewTests(SimpleTestCase):
 
     @patch("djangoapp.views.analyze_review_sentiments")
     @patch("djangoapp.views.get_request")
-    def test_returns_neutral_sentiment_when_analyzer_returns_none(self, mock_get_request, mock_analyze_review_sentiments):
+    def test_returns_neutral_sentiment_when_analyzer_returns_none(
+        self,
+        mock_get_request,
+        mock_analyze_review_sentiments,
+    ):
         mock_get_request.return_value = [{"review": "Great experience"}]
         mock_analyze_review_sentiments.return_value = None
 
